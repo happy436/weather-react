@@ -3,18 +3,24 @@ import { GlobalSVGSelector, variables } from '../../../../assets/img/icons/globa
 import s from "./ThisDay.module.scss"
 
 export const ThisDay = (props) => {
+    const {weather} = props
+
+    let date = new Date()
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+
     return (
         <div className={s.conteiner}>
             <div className={s.top}>
                 <div className={s.topWrapper}>
-                    <div className={s.thisTemp}>20°</div>
+                    <div className={s.thisTemp}>{Math.floor(weather.main.temp)}°</div>
                     <div className={s.thisDay}>Сегодня</div>
                 </div>
                 <GlobalSVGSelector id={variables.weather_logo.sun}/>
             </div>
             <div className={s.bottom}>
                 <div className={s.thisTime}>
-                    Время: <span>21:54</span>
+                    Время: <span>{`${hours}:${minutes}`}</span>
                 </div>
                 <div className={s.thisCity}>
                     Город: <span>Днепр</span>

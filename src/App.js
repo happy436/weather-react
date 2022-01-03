@@ -12,7 +12,7 @@ function App(props) {
             {/* <Popup /> */}
             <div className={s.App}>
                 <Header/>
-                <Home />
+                <Home state={props.store}/>
             </div>
         </div>
     );

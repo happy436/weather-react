@@ -1,10 +1,32 @@
 import React from 'react'
 import { ThisDayItem } from '../../pages/Home/components/ThisDayInfo/Item/ThisDayItem'
 import s from "./Popup.module.scss"
-import { items } from "../../pages/Home/components/ThisDayInfo/ThisDayInfo"
 import { GlobalSVGSelector, variables } from '../../assets/img/icons/global/GlobalSVGSelector'
 
 export const Popup = () => {
+
+    const items = [
+        {
+            icon_id: variables.temp,
+            name: 'Температура',
+            value: '20° - ощущается как 17°',
+        },
+        {
+            icon_id: variables.pressure,
+            name: 'Давление',
+            value: '765 мм ртутного столба - нормальное',
+        },
+        {
+            icon_id: variables.precipitation,
+            name: 'Осадки',
+            value: 'Без осадков',
+        },
+        {
+            icon_id: variables.wind,
+            name: 'Ветер',
+            value: '3 м/с юго-запад - легкий ветер',
+        },
+    ];
     return (
         <>
             <div className={s.blur}></div>

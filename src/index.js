@@ -10,10 +10,12 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <ThemeProvider>
-                <App />
+                <App store={store}/>
             </ThemeProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 )
+
+
 
