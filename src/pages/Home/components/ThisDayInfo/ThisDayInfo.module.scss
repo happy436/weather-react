@@ -1,0 +1,20 @@
+@import "../../../../styles/variables.scss";
+
+.container{
+    position: relative;
+    padding: 40px;
+    max-width: 750px;
+    width: 100%;
+    background:var(#{--components-background-default});
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    
+    .items{
+        z-index: 3;
+    }
+    .cloudImg{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
