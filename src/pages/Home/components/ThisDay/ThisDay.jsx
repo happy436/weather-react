@@ -1,5 +1,6 @@
 import React from 'react'
 import { GlobalSVGSelector, variables } from '../../../../assets/img/icons/global/GlobalSVGSelector'
+import { storage } from '../../../../model/Storage'
 import s from "./ThisDay.module.scss"
 
 export const ThisDay = (props) => {
@@ -8,6 +9,13 @@ export const ThisDay = (props) => {
     let date = new Date()
     let hours = date.getHours()
     let minutes = date.getMinutes()
+    function ten(time){
+        if(time < 10){
+            return(0+time)
+        } else {
+            return time
+        }
+    }
 
     return (
         <div className={s.conteiner}>
@@ -20,10 +28,10 @@ export const ThisDay = (props) => {
             </div>
             <div className={s.bottom}>
                 <div className={s.thisTime}>
-                    Время: <span>{`${hours}:${minutes}`}</span>
+                    Время: <span>{`${ten(hours)}:${ten(minutes)}`}</span>
                 </div>
                 <div className={s.thisCity}>
-                    Город: <span>Днепр</span>
+                    Город: <span>{storage.getItem('city') || "Не выбран"}</span>
                 </div>
             </div>
         </div>

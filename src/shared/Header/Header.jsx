@@ -4,13 +4,14 @@ import { GlobalSVGSelector, variables } from '../../assets/img/icons/global/Glob
 import { Theme } from '../../context/ThemeContext';
 import { useCustomDispatch } from '../../hooks/store';
 import { useTheme } from '../../hooks/useTheme';
+import { storage } from '../../model/Storage';
 import { fetchCurrentWeather } from '../../store/thunks/fetchCurrentWeather';
 import s from './Header.module.scss';
 
 export const Header = (props) => {
     const theme = useTheme();
 
-    const capitals = ['Бердянск', 'Винница', 'Днепр', 'Донецк', 'Житомир', 'Запорожье', 'Ивано-Франковск', 'Кременчуг', 'Кривой Рог', 'Луганск', 'Луцк', 'Львов', 'Мелитополь', 'Николаев', 'Одесса', 'Полтава', 'Ровно', 'Севастополь', 'Северодонецк', 'Сумы', 'Тернополь', 'Харьков', 'Хмельницкий', 'Черкассы', 'Черновцы']
+    const capitals = ['Бердянск', 'Винница', 'Днепр', 'Донецк', 'Житомир', 'Запорожье', 'Ивано-Франковск', 'Киев', 'Кременчуг', 'Кривой Рог', 'Луганск', 'Луцк', 'Львов', 'Мелитополь', 'Николаев', 'Одесса', 'Полтава', 'Ровно', 'Севастополь', 'Северодонецк', 'Сумы', 'Тернополь', 'Харьков', 'Хмельницкий', 'Черкассы', 'Черновцы']
     const options = 
         capitals.map(
             (capital,index) => {
@@ -42,13 +43,18 @@ export const Header = (props) => {
 
     const dispatch = useCustomDispatch()
 
-    useEffect(() => {
-        
-    }, [])
-
     function changeCity(el){
         let city = el.label === "" ? "Днепр" : el.label
+        storage.setItem('city',city)
         dispatch(fetchCurrentWeather(city))
+    }
+
+    function defValSelect(){
+        if(storage.getItem('city')){
+            return storage.getItem('city')
+        } else {
+            return null
+        }
     }
 
     return (
@@ -64,6 +70,8 @@ export const Header = (props) => {
                     <GlobalSVGSelector id={variables.logo.change_theme} />
                 </div>
                 <Select
+                    placeholder="Выбери"
+                    defaultValue={defValSelect}
                     styles={colourStyles}
                     options={options}
                     onChange={changeCity}
