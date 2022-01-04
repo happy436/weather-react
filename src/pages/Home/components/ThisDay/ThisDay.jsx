@@ -17,14 +17,25 @@ export const ThisDay = (props) => {
         }
     }
 
+    function weatherLogo(){
+        let weatherLogo = weather.weather[0].main
+        if(weatherLogo === "Drizzle" || weatherLogo === "Clouds"){
+            return variables.weather_logo.cloudy
+        } else if(weatherLogo === "Clear"){
+            return variables.weather_logo.sun
+        } else {
+            return null
+        }
+    }
+
     return (
         <div className={s.conteiner}>
             <div className={s.top}>
                 <div className={s.topWrapper}>
-                    <div className={s.thisTemp}>{Math.floor(weather.main.temp)}°</div>
+                    <div className={s.thisTemp}>{Math.round(weather.main.temp)}°</div>
                     <div className={s.thisDay}>Сегодня</div>
                 </div>
-                <GlobalSVGSelector id={variables.weather_logo.sun}/>
+                <GlobalSVGSelector id={weatherLogo()}/>
             </div>
             <div className={s.bottom}>
                 <div className={s.thisTime}>

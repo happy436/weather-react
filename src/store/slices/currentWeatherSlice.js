@@ -11,7 +11,8 @@ const initialState = {
         wind:{
             speed:0,
             gust:0,
-        }
+        },
+        weather:[{main:0}]
     },
     isLoading: false,
     response: {

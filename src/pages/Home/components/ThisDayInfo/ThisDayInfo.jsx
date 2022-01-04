@@ -8,8 +8,8 @@ export const ThisDayInfo = (props) => {
     const {weather} = props
 
     function valueTemp(){
-        let currentTemp = Math.floor(weather.main.temp)
-        let feels_like = Math.floor(weather.main.feels_like)
+        let currentTemp = Math.round(weather.main.temp)
+        let feels_like = Math.round(weather.main.feels_like)
         if(currentTemp === feels_like){
             return `${currentTemp}°`
         } else {
@@ -19,6 +19,27 @@ export const ThisDayInfo = (props) => {
 
     function pressure(){
         return (Math.floor(weather.main.pressure * 0.750062))
+    }
+
+    function weatherDirection(){
+        let weatherDirection = weather.wind.deg
+        if(weatherDirection > 337 & weatherDirection <= 22){
+            return "северный"
+        } else if(weatherDirection > 22 & weatherDirection <= 67){
+            return "северо-восточный"
+        } else if(weatherDirection > 67 & weatherDirection <= 112){
+            return "восточный"
+        } else if(weatherDirection > 112 & weatherDirection <= 157){
+            return "юго-восточный"
+        } else if(weatherDirection > 157 & weatherDirection <= 202){
+            return "южный"
+        } else if(weatherDirection > 202 & weatherDirection <= 247){
+            return "юго-западный"
+        } else if(weatherDirection > 247 & weatherDirection <= 292){
+            return "западный"
+        } else if(weatherDirection > 292 & weatherDirection <= 337){
+            return "северо-западный"
+        } 
     }
 
     const items = [
@@ -40,7 +61,7 @@ export const ThisDayInfo = (props) => {
         {
             icon_id: variables.wind,
             name: 'Ветер',
-            value: `${weather.wind.speed} м/c`/* '3 м/с юго-запад - легкий ветер' */,
+            value: `${weather.wind.speed} м/c ${weatherDirection()}`/* '3 м/с юго-запад - легкий ветер' */,
         },
     ];
 

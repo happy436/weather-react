@@ -12,13 +12,13 @@ export const Header = (props) => {
     const theme = useTheme();
 
     const capitals = ['Бердянск', 'Винница', 'Днепр', 'Донецк', 'Житомир', 'Запорожье', 'Ивано-Франковск', 'Киев', 'Кременчуг', 'Кривой Рог', 'Луганск', 'Луцк', 'Львов', 'Мелитополь', 'Николаев', 'Одесса', 'Полтава', 'Ровно', 'Севастополь', 'Северодонецк', 'Сумы', 'Тернополь', 'Харьков', 'Хмельницкий', 'Черкассы', 'Черновцы']
-    const options = 
+    const options =
         capitals.map(
-            (capital,index) => {
-                return {value:`city-${index+1}`, label:capital}
+            (capital, index) => {
+                return { value: `city-${index + 1}`, label: capital }
             }
         )
-    ;
+        ;
 
     const colourStyles = {
         control: (styles) => ({
@@ -43,19 +43,29 @@ export const Header = (props) => {
 
     const dispatch = useCustomDispatch()
 
-    function changeCity(el){
+    function changeCity(el) {
         let city = el.label === "" ? "Днепр" : el.label
-        storage.setItem('city',city)
+        storage.setItem('city', city)
         dispatch(fetchCurrentWeather(city))
     }
 
-    function defValSelect(){
-        if(storage.getItem('city')){
-            return storage.getItem('city')
+    function defValSelect() {
+        if(storage.getItem('city')) {
+            return { value: `city-1`, label: storage.getItem('city') }
         } else {
             return null
         }
     }
+
+    useEffect(() => {
+        let city = storage.getItem('city')
+        if(storage.getItem('city')){
+            return dispatch(fetchCurrentWeather(city))
+        } else {
+            return null
+        }
+        
+    })
 
     return (
         <header className={s.header}>
