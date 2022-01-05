@@ -5,11 +5,11 @@ import { ThisDayItem } from './Item/ThisDayItem';
 import { variables } from '../../../../assets/img/icons/indicators/IndicatorSVGSelector';
 
 export const ThisDayInfo = (props) => {
-    const weather = props.state.weather
+    const weather = props.state
 
     function valueTemp(){
-        let currentTemp = Math.round(weather.main.temp)
-        let feels_like = Math.round(weather.main.feels_like)
+        let currentTemp = Math.round(weather.current.temp_c)
+        let feels_like = Math.round(weather.current.feelslike_c)
         if(currentTemp === feels_like){
             return `${currentTemp}°`
         } else {
@@ -18,26 +18,26 @@ export const ThisDayInfo = (props) => {
     }
 
     function pressure(){
-        return (Math.floor(weather.main.pressure * 0.750062))
+        return (Math.floor(weather.current.pressure_mb * 0.750062))
     }
 
     function weatherDirection(){
-        let weatherDirection = weather.wind.deg
-        if(weatherDirection > 337 || weatherDirection <= 22){
+        let weatherDirection = weather.current.wind_dir
+        if(weatherDirection === "N" || weatherDirection === "NNW" || weatherDirection === "NNE"){
             return "северный"
-        } else if(weatherDirection > 22 & weatherDirection <= 67){
+        } else if(weatherDirection === "NE"){
             return "северо-восточный"
-        } else if(weatherDirection > 67 & weatherDirection <= 112){
+        } else if(weatherDirection === "E" || weatherDirection === "ENE" || weatherDirection === "ESE"){
             return "восточный"
-        } else if(weatherDirection > 112 & weatherDirection <= 157){
+        } else if(weatherDirection === "SE"){
             return "юго-восточный"
-        } else if(weatherDirection > 157 & weatherDirection <= 202){
+        } else if(weatherDirection === "S" || weatherDirection === "SSW" || weatherDirection === "SSE"){
             return "южный"
-        } else if(weatherDirection > 202 & weatherDirection <= 247){
+        } else if(weatherDirection === "SW"){
             return "юго-западный"
-        } else if(weatherDirection > 247 & weatherDirection <= 292){
+        } else if(weatherDirection === "W" || weatherDirection === "WSW" || weatherDirection === "WNW"){
             return "западный"
-        } else if(weatherDirection > 292 & weatherDirection <= 337){
+        } else if(weatherDirection === "NW"){
             return "северо-западный"
         } else {
             return "Ошибка"
@@ -53,7 +53,7 @@ export const ThisDayInfo = (props) => {
         {
             icon_id: variables.pressure,
             name: 'Влажность',
-            value: `${weather.main.humidity}%`,
+            value: `${weather.current.humidity}%`,
         },
         {
             icon_id: variables.precipitation,
@@ -63,7 +63,7 @@ export const ThisDayInfo = (props) => {
         {
             icon_id: variables.wind,
             name: 'Ветер',
-            value: `${weather.wind.speed} м/c ${weatherDirection()}`/* '3 м/с юго-запад - легкий ветер' */,
+            value: `${weather.current.wind_mph * 0.3} м/с ${weatherDirection()}`/* '3 м/с юго-запад - легкий ветер' */,
         },
     ];
 

@@ -24,7 +24,12 @@ export const ThisDay = (props) => {
         Rain: "Rain",
         Snow: "Snow",
         Mist: "Mist",
-        Fog: "Fog"
+        Fog: "Fog",
+        Overcast:"Overcast",
+        Partly_cloudy:"Partly cloudy",
+        Light_drizzle:"Light drizzle",
+        Patchy_rain_possible:"Patchy rain possible",
+        Light_rain:"Light rain"
     }
 
     let time = new Date
@@ -32,9 +37,17 @@ export const ThisDay = (props) => {
     function weatherLogo() {
         let weatherLogo = weather.current.condition.text
         switch (weatherLogo) {
+            case weatherStatus.Light_rain:
+                return variables.weather_logo.small_rain
+            case weatherStatus.Patchy_rain_possible:
+                return variables.weather_logo.small_rain
             case weatherStatus.Drizzle:
                 return variables.weather_logo.cloudy
+            case weatherStatus.Light_drizzle:
+                return variables.weather_logo.cloudy
             case weatherStatus.Clouds:
+                return variables.weather_logo.cloudy
+            case weatherStatus.Partly_cloudy:
                 return variables.weather_logo.cloudy
             case weatherStatus.Clear:
                 
@@ -45,6 +58,8 @@ export const ThisDay = (props) => {
             case weatherStatus.Mist:
                 return variables.weather_logo.fog
             case weatherStatus.Fog:
+                return variables.weather_logo.fog
+            case weatherStatus.Overcast:
                 return variables.weather_logo.fog
             default:
                 return null

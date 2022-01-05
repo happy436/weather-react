@@ -11,7 +11,7 @@ export const Home = (props) => {
                 return (
                     <div className={s.wrapper}>
                         <ThisDay state={props.state} />
-                        {/* <ThisDayInfo state={props.state} /> */}
+                        <ThisDayInfo state={props.state} />
                     </div>
                 )
             } else {
