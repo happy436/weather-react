@@ -1,7 +1,7 @@
 const CHOOSE_CITY = "CHOOSE_CITY"
 
 const api = {
-    base:'http://api.weatherapi.com/',
+    base:'https://api.weatherapi.com/',
     key:'251b1a2f64484c4c978160831220501'
 }
 
