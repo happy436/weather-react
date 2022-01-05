@@ -3,7 +3,8 @@ import { GlobalSVGSelector, variables } from '../../../../assets/img/icons/globa
 import s from "./ThisDay.module.scss"
 
 export const ThisDay = (props) => {
-    const weather = props.state.weather
+    const weather = props.state
+    window.weatherDay = weather
 
     let date = new Date()
     let hours = date.getHours()
@@ -29,18 +30,16 @@ export const ThisDay = (props) => {
     let time = new Date
 
     function weatherLogo() {
-        let weatherLogo = weather.weather[0].main
+        let weatherLogo = weather.current.condition.text
         switch (weatherLogo) {
             case weatherStatus.Drizzle:
                 return variables.weather_logo.cloudy
             case weatherStatus.Clouds:
                 return variables.weather_logo.cloudy
             case weatherStatus.Clear:
-                if(weather.sys.sunset < time.getMilliseconds){
-                    return variables.weather_logo.moon
-                } else {
+                
                     return variables.weather_logo.sun
-                }
+                
             case weatherStatus.Rain:
                 return variables.weather_logo.rain
             case weatherStatus.Mist:
@@ -50,13 +49,12 @@ export const ThisDay = (props) => {
             default:
                 return null
         }
-
     }
 
     function getCity() {
-        if (localStorage.getItem('reduxState')) {
-            if (JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city !== "") {
-                return JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city
+        if (localStorage.getItem('city')) {
+            if (localStorage.getItem('city') !== "") {
+                return localStorage.getItem('city')
             } else {
                 return "Не выбран"
             }
@@ -69,7 +67,7 @@ export const ThisDay = (props) => {
         <div className={s.conteiner}>
             <div className={s.top}>
                 <div className={s.topWrapper}>
-                    <div className={s.thisTemp}>{Math.round(weather.main.temp)}°</div>
+                    <div className={s.thisTemp}>{Math.round(weather.current.temp_c)}°</div>
                     <div className={s.thisDay}>Сегодня</div>
                 </div>
                 <GlobalSVGSelector id={weatherLogo()} />

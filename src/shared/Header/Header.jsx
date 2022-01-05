@@ -12,13 +12,9 @@ export const Header = (props) => {
     const dispatch = props.dispatch
     const storage = localStorage
     const capitals = ['Бердянск', 'Винница', 'Днепр', 'Донецк', 'Житомир', 'Запорожье', 'Ивано-Франковск', 'Киев', 'Кременчуг', 'Кривой Рог', 'Луганск', 'Луцк', 'Львов', 'Мелитополь', 'Николаев', 'Одесса', 'Полтава', 'Ровно', 'Севастополь', 'Северодонецк', 'Сумы', 'Тернополь', 'Харьков', 'Хмельницкий', 'Черкассы', 'Черновцы']
+    const capitalsUS = ['Berdyansk', 'Vinnitsa', 'Dnepropetrovsk', 'Donetsk', 'Zhitomir', '47.8349,35.1475', 'Ivano-Frankivsk', 'Kiev', 'Kremenchug', 'Kryvyi Rih', 'Lugansk', 'Lutsk ',' Lviv ',' Melitopol ',' Nikolaev ',' Odessa ',' Poltava ',' Exactly ',' Sevastopol ',' Severodonetsk ',' Sumy ',' Ternopil ',' Kharkiv ',' Khmelnitsky ', 'Cherkasy', 'Chernivtsi']
     const options =
-        capitals.map(
-            (capital, index) => {
-                return { value: `city-${index + 1}`, label: capital }
-            }
-        )
-        ;
+    capitals.map((item, index) => ({value:capitalsUS[index], label:item }));
 
     const colourStyles = {
         control: (styles) => ({
@@ -43,13 +39,14 @@ export const Header = (props) => {
     }
 
     function changeCity(el) {
-        let city = el.label === "" ? "Днепр" : el.label
+        let city = el.value === "" ? "Днепр" : el.value
+        localStorage.setItem('city', el.label)
         dispatch(fetching(city))
     }
 
     function defValSelect() {
-        if(storage.getItem('reduxState')) {
-            return { value: `city-1`, label: JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city }
+        if(storage.getItem('city')) {
+            return { value: `city-1`, label: localStorage.getItem('city') }
         } else {
             return null
         }

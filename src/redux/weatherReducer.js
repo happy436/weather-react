@@ -1,23 +1,24 @@
 const CHOOSE_CITY = "CHOOSE_CITY"
 
 const api = {
-    base:'http://api.openweathermap.org/data/2.5/',
-    key:'cbd439e4a46a63c78a1555506deab89b'
+    base:'http://api.weatherapi.com/',
+    key:'251b1a2f64484c4c978160831220501'
 }
 
 let initialState = {
-    city:"",
-    weather:{
-        main:{
-            temp:0,
+    location:{
+        name:"",
+    },
+    current:{
+        temp_c:0,
+        condition:{
+            text:""
         },
-        wind:{
-            speed:0,
-            deg:0,
-        },
-        weather:[
-            {main:""},
-        ]
+        wind_mph:0,
+        wind_dir:"",
+        pressure_mb:0,
+        humidity:0,
+        feelslike_c:0,
     }
 }
 
@@ -25,8 +26,7 @@ const weatherReducer = (state = initialState, action) => {
     
     switch(action.type){
         case CHOOSE_CITY:
-            state.city = action.city
-            state.weather = action.weather
+            state = action.weather
             return state
         default:
             return state
@@ -44,7 +44,7 @@ export const cityWeatherActionCreator = (city, weather) => {
 
 export function fetching(city){
     return (dispatch) => {
-            fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+            fetch(`${api.base}v1/current.json?key=${api.key}&q=${city}&aqi=no`)
             .then(res => res.json())
             .then((result) => {
                 dispatch({

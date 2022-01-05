@@ -141,12 +141,12 @@ export const GlobalSVGSelector = (props) => {
             <path d="M18 18C18 22.97 22.03 27 27 27C31.502 27 35.23 23.696 35.894 19.38C36.55 19.134 37.258 19 38 19C41.314 19 44 21.686 44 25C44 28.314 41.314 31 38 31H16C11.582 31 8 27.418 8 23C8 18.582 11.582 15 16 15C16.834 15 17.636 15.128 18.392 15.364C18.136 16.198 18 17.082 18 18Z" fill="url(#paint1_radial_2_551)"/>
             <defs>
             <linearGradient id="paint0_linear_2_551" x1="26" y1="9" x2="26" y2="31" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#9FC7FF"/>
-            <stop offset="1" stop-color="#9BC1F5"/>
+            <stop stopColor="#9FC7FF"/>
+            <stop offset="1" stopColor="#9BC1F5"/>
             </linearGradient>
             <radialGradient id="paint1_radial_2_551" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(21.9439 -29.6966) rotate(-90) scale(20.9574 6.69705)">
-            <stop stop-color="#486DA8" stop-opacity="0.4"/>
-            <stop offset="1" stop-color="#486DA8" stop-opacity="0"/>
+            <stop stopColor="#486DA8" stopOpacity="0.4"/>
+            <stop offset="1" stopColor="#486DA8" stopOpacity="0"/>
             </radialGradient>
             </defs>
             </svg>
