@@ -24,7 +24,6 @@
     font-weight: bold;
     font-size: 2.5rem;
     color:#4793FF;
-
 }
 
 .logo, .changeTheme{
@@ -34,4 +33,24 @@
 
 .select{
 
+}
+
+@media(max-width:320px){
+    .logo{
+        display: none;
+    }
+    .logo, .changeTheme{
+        margin-right: 5px;
+        margin-left:5px;
+        cursor: pointer;
+    }
+    .title{
+        font-size: 2rem;
+    }
+    .logo{
+        svg{
+            width: 35px;
+            height: 35px;
+        }
+    }
 }

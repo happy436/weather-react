@@ -45,3 +45,13 @@
 
     }
 }
+
+@media (max-width:320px){
+    .conteiner{
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .top{
+        margin-bottom: 10px;
+    }
+}

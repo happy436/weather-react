@@ -25,7 +25,7 @@ export const Header = (props) => {
             ...styles,
             backgroundColor:
                 theme.activeTheme === 0 ? '#4F4F4F' : 'rgba(71, 147, 255, 0.2)',
-            width: '194px',
+            width: '170px',
             height: '37px',
             border: 'none',
             borderRadius: '10px',

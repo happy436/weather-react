@@ -13,3 +13,13 @@
     text-align: center;
     color:var(#{--text-color-default})
 }
+
+@media (max-width:320px){
+    .home{
+        .wrapper{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

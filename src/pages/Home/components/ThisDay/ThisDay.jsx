@@ -8,42 +8,54 @@ export const ThisDay = (props) => {
     let date = new Date()
     let hours = date.getHours()
     let minutes = date.getMinutes()
-    function ten(time){
-        if(time < 10){
-            return(0+time)
+    function ten(time) {
+        if (time < 10) {
+            return (0 + time)
         } else {
             return time
         }
     }
 
     const weatherStatus = {
-        Drizzle:"Drizzle",
-        Clouds:"Clouds",
-        Clear:"Clear",
-        Rain:"Rain",
-        Snow:"Snow"
+        Drizzle: "Drizzle",
+        Clouds: "Clouds",
+        Clear: "Clear",
+        Rain: "Rain",
+        Snow: "Snow",
+        Mist: "Mist",
+        Fog: "Fog"
     }
 
-    function weatherLogo(){
+    let time = new Date
+
+    function weatherLogo() {
         let weatherLogo = weather.weather[0].main
-        switch(weatherLogo){
+        switch (weatherLogo) {
             case weatherStatus.Drizzle:
                 return variables.weather_logo.cloudy
             case weatherStatus.Clouds:
                 return variables.weather_logo.cloudy
             case weatherStatus.Clear:
-                return variables.weather_logo.sun
+                if(weather.sys.sunset < time.getMilliseconds){
+                    return variables.weather_logo.moon
+                } else {
+                    return variables.weather_logo.sun
+                }
             case weatherStatus.Rain:
                 return variables.weather_logo.rain
+            case weatherStatus.Mist:
+                return variables.weather_logo.fog
+            case weatherStatus.Fog:
+                return variables.weather_logo.fog
             default:
                 return null
         }
-        
+
     }
 
-    function getCity(){
-        if(localStorage.getItem('reduxState')){
-            if(JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city !== ""){
+    function getCity() {
+        if (localStorage.getItem('reduxState')) {
+            if (JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city !== "") {
                 return JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city
             } else {
                 return "Не выбран"
@@ -60,7 +72,7 @@ export const ThisDay = (props) => {
                     <div className={s.thisTemp}>{Math.round(weather.main.temp)}°</div>
                     <div className={s.thisDay}>Сегодня</div>
                 </div>
-                <GlobalSVGSelector id={weatherLogo()}/>
+                <GlobalSVGSelector id={weatherLogo()} />
             </div>
             <div className={s.bottom}>
                 <div className={s.thisTime}>

@@ -19,3 +19,14 @@
         opacity: 0.5;
     }
 }
+
+@media(max-width:320px){
+    .container{
+        padding: 10px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .cloudImg{
+        display: none;
+    }
+}
