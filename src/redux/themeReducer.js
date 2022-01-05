@@ -6,7 +6,6 @@ let initialState = {
 }
 
 const themeReducer = (state = initialState, action) => {
-    
     switch(action.type){
         case CHANGE_THEME:
             if(state.activeTheme < state.themes.length - 1){
@@ -23,6 +22,7 @@ const themeReducer = (state = initialState, action) => {
 }
 
 export const themeChangeActionCreator = () => {
+    /* done */
     return{
         type: CHANGE_THEME
     }

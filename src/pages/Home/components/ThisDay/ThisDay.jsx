@@ -1,10 +1,9 @@
 import React from 'react'
 import { GlobalSVGSelector, variables } from '../../../../assets/img/icons/global/GlobalSVGSelector'
-import { storage } from '../../../../model/Storage'
 import s from "./ThisDay.module.scss"
 
 export const ThisDay = (props) => {
-    const {weather} = props
+    const weather = props.state.weather
 
     let date = new Date()
     let hours = date.getHours()
@@ -17,14 +16,40 @@ export const ThisDay = (props) => {
         }
     }
 
+    const weatherStatus = {
+        Drizzle:"Drizzle",
+        Clouds:"Clouds",
+        Clear:"Clear",
+        Rain:"Rain",
+        Snow:"Snow"
+    }
+
     function weatherLogo(){
         let weatherLogo = weather.weather[0].main
-        if(weatherLogo === "Drizzle" || weatherLogo === "Clouds"){
-            return variables.weather_logo.cloudy
-        } else if(weatherLogo === "Clear"){
-            return variables.weather_logo.sun
+        switch(weatherLogo){
+            case weatherStatus.Drizzle:
+                return variables.weather_logo.cloudy
+            case weatherStatus.Clouds:
+                return variables.weather_logo.cloudy
+            case weatherStatus.Clear:
+                return variables.weather_logo.sun
+            case weatherStatus.Rain:
+                return variables.weather_logo.rain
+            default:
+                return null
+        }
+        
+    }
+
+    function getCity(){
+        if(localStorage.getItem('reduxState')){
+            if(JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city !== ""){
+                return JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city
+            } else {
+                return "Не выбран"
+            }
         } else {
-            return null
+            return "Не выбран"
         }
     }
 
@@ -42,7 +67,7 @@ export const ThisDay = (props) => {
                     Время: <span>{`${ten(hours)}:${ten(minutes)}`}</span>
                 </div>
                 <div className={s.thisCity}>
-                    Город: <span>{storage.getItem('city') || "Не выбран"}</span>
+                    Город: <span>{getCity()}</span>
                 </div>
             </div>
         </div>

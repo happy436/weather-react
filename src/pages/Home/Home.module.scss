@@ -1,7 +1,15 @@
+@import "../../styles/variables.scss";
+
 .home{
     .wrapper{
         display: flex;
         justify-content: space-between;
         margin-bottom: 50px;
     }
+}
+
+.wrapper_city_dont_choose{
+    font-size: 6rem;
+    text-align: center;
+    color:var(#{--text-color-default})
 }

@@ -1,24 +1,38 @@
 import React from 'react'
-import { useCustomSelector } from '../../hooks/store'
-import { selectCurrentWeatherData } from '../../store/selectors'
 import { ThisDay } from './components/ThisDay/ThisDay'
 import { ThisDayInfo } from './components/ThisDayInfo/ThisDayInfo'
 import s from "./Home.module.scss"
 
 export const Home = (props) => {
 
-    const {weather} = useCustomSelector( 
-        selectCurrentWeatherData
-    )
-
-    window.weather = weather
+    function getCity() {
+        if (localStorage.getItem('reduxState')) {
+            if (JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city !== "") {
+                return (
+                    <div className={s.wrapper}>
+                        <ThisDay state={props.state} />
+                        <ThisDayInfo state={props.state} />
+                    </div>
+                )
+            } else {
+                return (
+                    <div className={s.wrapper_city_dont_choose}>
+                        Не выбран город
+                    </div>
+                )
+            }
+        } else {
+            return (
+                <div className={s.wrapper_city_dont_choose}>
+                    Не выбран город
+                </div>
+            )
+        }
+    }
 
     return (
         <div className={s.home}>
-            <div className={s.wrapper}>
-                <ThisDay weather={weather}/>
-                <ThisDayInfo weather={weather}/>
-            </div>
+            {getCity()}
             {/* <div>
                 <Days/>
             </div> */}

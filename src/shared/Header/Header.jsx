@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Select from 'react-select';
 import { GlobalSVGSelector, variables } from '../../assets/img/icons/global/GlobalSVGSelector';
-import { Theme } from '../../context/ThemeContext';
-import { useCustomDispatch } from '../../hooks/store';
-import { useTheme } from '../../hooks/useTheme';
-import { storage } from '../../model/Storage';
-import { fetchCurrentWeather } from '../../store/thunks/fetchCurrentWeather';
+import { changeCssRootVariables } from '../../model/ChangeCssRootVariables';
+import { themeChangeActionCreator } from '../../redux/themeReducer';
+import { fetching } from '../../redux/weatherReducer';
 import s from './Header.module.scss';
 
 export const Header = (props) => {
-    const theme = useTheme();
 
+    const theme = props.state
+    const dispatch = props.dispatch
+    const storage = localStorage
     const capitals = ['Бердянск', 'Винница', 'Днепр', 'Донецк', 'Житомир', 'Запорожье', 'Ивано-Франковск', 'Киев', 'Кременчуг', 'Кривой Рог', 'Луганск', 'Луцк', 'Львов', 'Мелитополь', 'Николаев', 'Одесса', 'Полтава', 'Ровно', 'Севастополь', 'Северодонецк', 'Сумы', 'Тернополь', 'Харьков', 'Хмельницкий', 'Черкассы', 'Черновцы']
     const options =
         capitals.map(
@@ -24,7 +24,7 @@ export const Header = (props) => {
         control: (styles) => ({
             ...styles,
             backgroundColor:
-                theme.theme === Theme.DARK ? '#4F4F4F' : 'rgba(71, 147, 255, 0.2)',
+                theme.activeTheme === 0 ? '#4F4F4F' : 'rgba(71, 147, 255, 0.2)',
             width: '194px',
             height: '37px',
             border: 'none',
@@ -33,38 +33,34 @@ export const Header = (props) => {
         }),
         singleValue: (styles) => ({
             ...styles,
-            color: theme.theme === Theme.DARK ? '#fff' : '#000',
+            color: theme.activeTheme === 0 ? '#fff' : '#000',
         }),
     };
 
     function changeTheme() {
-        theme.changeTheme(theme.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
+        dispatch(themeChangeActionCreator())
+        changeCssRootVariables(theme.themes[theme.activeTheme])
     }
-
-    const dispatch = useCustomDispatch()
 
     function changeCity(el) {
         let city = el.label === "" ? "Днепр" : el.label
-        storage.setItem('city', city)
-        dispatch(fetchCurrentWeather(city))
+        dispatch(fetching(city))
     }
 
     function defValSelect() {
-        if(storage.getItem('city')) {
-            return { value: `city-1`, label: storage.getItem('city') }
+        if(storage.getItem('reduxState')) {
+            return { value: `city-1`, label: JSON.parse(localStorage.getItem('reduxState')).weatherReducer.city }
         } else {
             return null
         }
     }
 
     useEffect(() => {
-        let city = storage.getItem('city')
-        if(storage.getItem('city')){
-            return dispatch(fetchCurrentWeather(city))
+        if(storage.getItem('reduxState')){
+            changeCssRootVariables(theme.themes[theme.activeTheme])
         } else {
             return null
         }
-        
     })
 
     return (

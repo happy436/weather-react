@@ -5,7 +5,7 @@ import { ThisDayItem } from './Item/ThisDayItem';
 import { variables } from '../../../../assets/img/icons/indicators/IndicatorSVGSelector';
 
 export const ThisDayInfo = (props) => {
-    const {weather} = props
+    const weather = props.state.weather
 
     function valueTemp(){
         let currentTemp = Math.round(weather.main.temp)
@@ -23,7 +23,7 @@ export const ThisDayInfo = (props) => {
 
     function weatherDirection(){
         let weatherDirection = weather.wind.deg
-        if(weatherDirection > 337 & weatherDirection <= 22){
+        if(weatherDirection > 337 || weatherDirection <= 22){
             return "северный"
         } else if(weatherDirection > 22 & weatherDirection <= 67){
             return "северо-восточный"
@@ -39,7 +39,9 @@ export const ThisDayInfo = (props) => {
             return "западный"
         } else if(weatherDirection > 292 & weatherDirection <= 337){
             return "северо-западный"
-        } 
+        } else {
+            return "Ошибка"
+        }
     }
 
     const items = [
