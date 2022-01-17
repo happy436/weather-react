@@ -14,7 +14,7 @@
     color:var(#{--text-color-default})
 }
 
-@media (max-width:320px){
+@media (max-width:425px){
     .home{
         .wrapper{
             flex-direction: column;

@@ -46,10 +46,11 @@
     }
 }
 
-@media (max-width:320px){
+@media (max-width:425px){
     .conteiner{
         border-radius: 0;
         box-shadow: none;
+        max-width: 425px;
     }
     .top{
         margin-bottom: 10px;

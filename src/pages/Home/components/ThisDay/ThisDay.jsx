@@ -11,7 +11,7 @@ export const ThisDay = (props) => {
     let minutes = date.getMinutes()
     function ten(time) {
         if (time < 10) {
-            return (0 + time)
+            return ("0" + String(time))
         } else {
             return time
         }
@@ -31,8 +31,6 @@ export const ThisDay = (props) => {
         Patchy_rain_possible:"Patchy rain possible",
         Light_rain:"Light rain"
     }
-
-    let time = new Date
 
     function weatherLogo() {
         let weatherLogo = weather.current.condition.text

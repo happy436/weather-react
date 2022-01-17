@@ -63,7 +63,7 @@ export const ThisDayInfo = (props) => {
         {
             icon_id: variables.wind,
             name: 'Ветер',
-            value: `${weather.current.wind_mph * 0.3} м/с ${weatherDirection()}`/* '3 м/с юго-запад - легкий ветер' */,
+            value: `${Number(weather.current.wind_mph * 0.3).toFixed(2)} м/с ${weatherDirection()}`/* '3 м/с юго-запад - легкий ветер' */,
         },
     ];
 
